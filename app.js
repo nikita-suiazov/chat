@@ -24,19 +24,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 var MongoStore = require('connect-mongo')(session);
+
 app.use(session({
   secret: config.get('session:secret'),
   key: config.get('session:key'),
   store: new MongoStore({mongooseConnection: mongoose.connection })
 })); //connect.sid - cookie for user when it came first
 
-app.use(function(req, res, next){
-  req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
-  res.send("Visits: " + req.session.numberOfVisits);
-});
+// app.use(function(req, res, next){
+//   req.session.numberOfVisits = req.session.numberOfVisits + 1 || 1;
+//   res.send("Visits: " + req.session.numberOfVisits);
+// });
 
 app.use(require('./middleware/sendHttpError'));
-// app.use(app.router);
 require('./routes/index')(app);
 app.use(express.static(path.join(__dirname, 'public')));
 
