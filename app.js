@@ -37,7 +37,8 @@ app.use(session({
 // });
 
 app.use(require('./middleware/sendHttpError'));
-require('./routes/index')(app);
+app.use(require('./middleware/loadUser'));
+require('./routes')(app);
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use('/', index);

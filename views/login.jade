@@ -22,8 +22,6 @@ block content
         
   script.
     $(document.forms['login-form']).on('submit', function() {
-    //- $(#lolo).submit(function() {
-      console.log("sosososoosossoat");
       var form = $(this);
       $('.error', form).html('');
       $(":submit", form).button("loading");

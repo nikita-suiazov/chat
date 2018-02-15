@@ -1,7 +1,30 @@
 nav.navbar.navbar-inverse
-  .container-fluid
-    .navbar-header
-      a(class='navbar-brand', href='/') Home
-    ul.nav.navbar-nav.navbar-right
+  ul.nav.navbar-nav
+    li
+      a(href='/') Home
+    - if(user) {
       li
-        a( href="/login" ) Login
+        a(href='/chat') Чат
+    - }
+  ul.nav.navbar-nav.navbar-right
+    - if(user) {
+      li
+        a(href="#", onclick="submitForm()") Выйти
+    - } else {
+      li
+        a(href='/login') Войти
+    - }
+//- nav.navbar.navbar-inverse
+//-   .container-fluid
+//-     .navbar-header
+//-       a(class='navbar-brand', href='/') Home
+//-     ul.nav.navbar-nav.navbar-right
+//-       li
+//-         a( href="/login" ) Login
+script.
+  function submitForm(){
+    $(document.body).append('<form id=\'submitme\' method=\'POST\' action=\'/logout\'></form>'); 
+    $('#submitme').submit();
+    return false;
+  }
+  

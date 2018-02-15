@@ -9,7 +9,6 @@ exports.get = function(req, res) {
 exports.post = function(req, res, next) {
   var username = req.body.username;
   var password = req.body.password;
-  console.log('LOL!!!');
 
   User.authorize(username, password, function(err, user) {
     if (err) {
