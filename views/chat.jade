@@ -20,14 +20,8 @@ block content
     });
     
     socket
-      .on('message', function(username, message) {
-        printMessage(username + "> " + message);
-      })
-      .on('leave', function(username) {
-        printStatus(username + " вышел из чата");
-      })
-      .on('join', function(username) {
-        printStatus(username + " вошёл в чат");
+      .on('message', function(message) {
+        printMessage(message);
       })
       .on('connect', function() {
         printStatus("соединение установлено");
@@ -38,19 +32,8 @@ block content
         printStatus("соединение потеряно");
         form.off('submit', sendMessage);
         input.prop('disabled', true);
-        this.$emit('error');
-      })
-      .on('logout', function() {
-        location.href = "/";
-      })
-      .on('error', function(reason) {
-        if (reason == "handshake unauthorized") {
-          printStatus("вы вышли из сайта");
-        } else {
-          setTimeout(function() {
-            socket.socket.connect();
-          }, 500);
-        }
+        setTimeout(reconnect, 500);
+        //this.$emit('error');
       });
       
       
