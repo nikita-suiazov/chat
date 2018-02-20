@@ -8,7 +8,7 @@ var HttpError = require('./error/index').HttpError;
 var errorHandler = require('express-error-handler');
 var config = require('./config');
 var mongoose = require('./lib/mongoose');
-var session = require('express-session')
+var session = require('express-session');
 
 var app = express();
 
@@ -23,12 +23,13 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-var MongoStore = require('connect-mongo')(session);
+
+var sessionStore = require('./lib/sessionStore');
 
 app.use(session({
   secret: config.get('session:secret'),
   key: config.get('session:key'),
-  store: new MongoStore({mongooseConnection: mongoose.connection })
+  store: sessionStore // объект который умеет загружать/сохранять сессии
 })); //connect.sid - cookie for user when it came first
 
 // app.use(function(req, res, next){
