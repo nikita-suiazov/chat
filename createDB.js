@@ -21,29 +21,6 @@ function dropDatabase(callback) {
   db.dropDatabase(callback);
 }
 
-// function createUsers(callback) {
-//   async.parallel([
-//     function(callback){
-//       var vasya = new User({username: 'Вася', password: 'supervasya'});
-//       vasya.save(function(err){
-//         callback(err, vasya);
-//       });
-//     },
-//     function(callback){
-//       var petya = new User({username: 'Петя', password: '123'});
-//       petya.save(function(err){
-//         callback(err, petya);
-//       });
-//     },
-//     function(callback){
-//       var admin = new User({username: 'admin', password: 'thetruehero'});
-//       admin.save(function(err){
-//         callback(err, admin);
-//       });
-//     }
-//   ], callback);
-// }
-
 function requireModels(callback) {
   require('./models/user');
 

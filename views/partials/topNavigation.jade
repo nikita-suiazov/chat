@@ -4,15 +4,15 @@ nav.navbar.navbar-inverse
       a(href='/') Home
     - if(user) {
       li
-        a(href='/chat') Чат
+        a(href='/chat') Chat
     - }
   ul.nav.navbar-nav.navbar-right
     - if(user) {
       li
-        a(href="#", onclick="submitForm()") Выйти
+        a(href="#", onclick="submitForm()") LogOut
     - } else {
       li
-        a(href='/login') Войти
+        a(href='/login') LogIn
     - }
 
 script.
